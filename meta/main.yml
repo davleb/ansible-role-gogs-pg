@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  author: David Lebret
+  description: Gogs server
+  license: MIT
+  min_ansible_version: 1.2
+  platforms:
+  - name: Debian
+    versions:
+    - jessie
+    - squeeze
+    - wheezy
+  categories:
+  - development
+  - system
+  - web
+dependencies: []

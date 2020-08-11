@@ -1,0 +1,21 @@
+---
+
+- name: Ensure group is created
+  user: name={{gogs_app_group}} home=/home/git
+
+- name: Ensure user is created
+  user: name={{gogs_app_user}} group={{gogs_app_group}}
+
+- name: Ensure app folder is created
+  file: >
+    path={{item}}
+    state=directory
+    mode=0755
+    owner={{gogs_app_user}}
+    group={{gogs_app_group}}
+    recurse=yes
+  with_items:
+    - "{{gogs_app_home}}"
+    - "{{gogs_app_home}}/custom/conf"
+    - "{{gogs_repos_home}}"
+    - "{{gogs_log_root}}"

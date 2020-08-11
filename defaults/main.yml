@@ -1,0 +1,29 @@
+---
+gogs_db_name: gogs
+gogs_db_user: gogs
+gogs_db_password: osh177retp
+gogs_db_host: 127.0.0.1
+gogs_db_port: 5432
+
+gogs_app_user: git
+gogs_app_group: git
+gogs_app_home: /home/git/gogs
+gogs_repos_home: /home/git/gogs-repositories
+gogs_log_root: /var/log/gogs
+
+gogs_x509_string: /C=FR/ST=France/L=Tarbes/O=Gozen/CN=gogs.cloudit.fr 
+
+gogs_app_hostname: localhost
+gogs_app_email: dlebret65@laposte.net
+
+gogs_web_protocol: https
+
+gogs_app_url: "{{gogs_web_protocol}}://{{gogs_app_hostname}}/"
+gogs_app_bind_address: localhost
+gogs_app_bind_port: 3000
+
+gogs_dist_version: v0.9.60
+gogs_dist_url: https://dl.gogs.io/gogs_{{gogs_dist_version}}_linux_amd64.tar.gz
+gogs_dist_sha256: ab4d8341d1c14e753914b68b3ec0c9b169c361123dcef541ff34444b1e54812b
+
+gogs_tmp_folder: ~/

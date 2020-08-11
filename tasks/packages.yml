@@ -1,0 +1,15 @@
+---
+- name: install gogs dependencies
+  apt: >
+    name={{item}}
+    state=present
+    update_cache=yes
+    cache_valid_time=60
+    install_recommends=no
+  with_items:
+    - git
+    - postgresql
+    # for ansible
+    - libpq-dev
+    - python-psycopg2
+

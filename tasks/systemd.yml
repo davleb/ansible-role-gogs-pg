@@ -1,0 +1,11 @@
+---
+
+- name: Copy the supplied script to create the gogs systemd service
+  shell: cp {{gogs_app_home}}/scripts/systemd/gogs.service /etc/systemd/system/gogs.service
+
+- name: Enable and start the systemd gogs service
+  service: name=gogs enabled=yes state=started
+
+- name: Ensure systemd service gogs is running
+  service: name=gogs state=running
+

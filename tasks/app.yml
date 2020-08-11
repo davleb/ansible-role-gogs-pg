@@ -1,0 +1,41 @@
+---
+
+- name: Ensure app config updated
+  template: >
+    src=app.ini.j2
+    dest={{gogs_app_home}}/custom/conf/app.ini
+    mode=0755
+    owner={{gogs_app_user}}
+    group={{gogs_app_group}}
+  notify: restart gogs
+
+- name: Create self-signed certificate for https
+  #a cert and a key are created when gogs uses https - do not uses brackets for variables in when clause!!
+  when: gogs_web_protocol == "https" 
+  command: openssl req -new -nodes -x509 -subj "{{gogs_x509_string}}" -days 3650 -keyout {{gogs_app_home}}/custom/conf/key.pem -out {{gogs_app_home}}/custom/conf/cert.pem -extensions v3_ca creates={{gogs_app_home}}/custom/conf/cert.pem
+  notify: restart gogs
+  tags:
+    - https	
+
+- name: Ensure init.d script is installed
+  #from Ubuntu 16.04 do not use init.d script but systemd script
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version|int < 16
+  template: >
+    src=etc/init.d/gogs.j2
+    dest=/etc/init.d/gogs
+    mode=0755
+    owner=root
+    group=root
+  notify:
+    - restart gogs
+    - register gogs init
+
+- name: Make sure logrotate config installed
+  template: >
+    src=etc/logrotate.d/gogs.j2
+    dest=/etc/logrotate.d/gogs
+    mode=0755
+    owner=root
+    group=root
+
+

@@ -1,0 +1,12 @@
+{{gogs_log_root}}/*.log {
+    size 10M
+    missingok
+    rotate 10
+    compress
+    delaycompress
+    notifempty
+    sharedscripts
+    postrotate
+        service gogs reload
+    endscript
+}
